@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ganlin.dao.UserMapper">
+    <select id="getUserList" resultType="com.ganlin.beans.User">
+        select * from user
+    </select>
+    <select id="getUserById" resultType="com.ganlin.beans.User" parameterType="int">
+        select * from user where id= #{id} limit 1
+    </select>
+    <select id="queryByName" resultType="com.ganlin.beans.User" parameterType="String">
+        select * from user where name like  "%"#{name}"%"
+    </select>
+    <!--对象中的属性可以直接取出来-->
+    <insert id="addUser" parameterType="com.ganlin.beans.User">
+        insert into user(id,name,pwd) values(#{id},#{name},#{pwd});
+    </insert>
+    <update id="modifyUser" parameterType="com.ganlin.beans.User">
+        update user set name=#{name},pwd=#{pwd} where id=#{id};
+    </update>
+    <delete id="deleteUser" parameterType="com.ganlin.beans.User">
+        delete from user where id=#{id};
+    </delete>
+</mapper>
